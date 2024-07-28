@@ -1,0 +1,208 @@
+@import '../../styles/shared-styles.scss';
+
+.intro-section {
+    text-align: center;
+    color: yellow;
+    padding: 20px;
+}
+
+.search-box {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 20px;
+}
+
+.product-category {
+    width: 200px;
+}
+
+.search-input {
+    width: 300px;
+    margin-right: 10px;
+    border-color: rgba(255, 255, 255, 0.5);
+    color: #333333; 
+    box-shadow: 0 0 0 5px rgba(212, 8, 8, 0.3);
+}
+
+.form-control {
+    background-color: #ffffff;
+    height: 50px;
+    color: rgb(10, 10, 10);
+}
+
+.form-control::placeholder {
+    /* Chrome, Firefox, Opera, Safari 10.1+ */
+    color: rgba(17, 16, 16, 0.5);
+    opacity: 1;
+    /* Firefox */
+}
+
+.form-control:-ms-input-placeholder {
+    /* Internet Explorer 10-11 */
+    color: rgba(255, 255, 255, 0.5);
+}
+
+.form-control::-ms-input-placeholder {
+    /* Microsoft Edge */
+    color: rgba(255, 255, 255, 0.5);
+}
+
+.product-item {
+    background-color: #ffffff;
+    border: 1px solid rgb(238, 238, 235);
+    border-radius: 20px;
+    padding: 20px;
+    margin-bottom: 20px;
+}
+
+.product-image {
+    width: 100%;
+    height: 300px;
+    margin-bottom: 10px;
+}
+
+.product-name {
+    text-transform: uppercase;
+    word-wrap: break-word;
+    margin: 5px 0;
+    font-weight: 900;
+    font-size: 18px;
+    color: #323232;
+    height: 120px; /* Đặt chiều cao tương đương với 4 dòng */
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-line-clamp: 5; /* Số dòng tối đa để hiển thị */
+    -webkit-box-orient: vertical;
+    word-wrap: break-word;
+}
+.product-name:hover {
+    color: rgb(255, 196, 0);
+}
+.product-description {
+    color: black;
+}
+
+.product-warranty {
+    color: $shopapp-tint-color;
+}
+
+.product-price {
+    text-transform: uppercase;
+    font-weight: 900;
+    color: #e31837;
+    font-size: 18px;
+    text-align: center;
+}
+
+.product-rating {
+    color: #FFD700;
+    margin-top: 10px;
+}
+
+.product-actions {
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+}
+
+.space-x {
+    margin: 0 5px;
+    /*margin-top, margin-right, margin-bottom, margin-left*/
+}
+
+.page-number {
+    cursor: pointer;
+    padding: 5px 10px;
+    border: 1px solid #ccc;
+    margin: 0 2px;
+    border-radius: 3px;
+}
+
+.page-number.active {
+    background-color: $shopapp-color !important;
+    color: #fff;
+    border-color: $shopapp-color !important;
+}
+.btn-primary {
+    background-color: $shopapp-color;
+    border-color: $shopapp-color;    
+}
+.btn.btn-primary {
+    margin-left: 10px;
+}
+
+
+.hero-box {
+    padding-top: 200px;
+    position: relative; /* Make the hero box a relative element for absolute positioning */
+    background-image: url(https://images.foody.vn/res/g64/630562/prof/s/image-47a982d5-240109153849.jpeg);
+    background-size: contain;
+    background-position: center;
+    background-attachment: fixed;
+    padding: 225px 0;
+}
+
+.hero-box .hero-text h1,
+.hero-box .hero-text p {
+    text-transform: uppercase;
+    line-height: 1em;
+    color: #ffffff;
+}
+
+.hero-box .hero-text h1 {
+    font-family: "Raleway", sans-serif;
+    letter-spacing: 0.08em;
+    color: #fff;
+    font-weight: 700;
+    text-align: center;
+    font-size: 72px;
+    line-height: 1em;
+    margin: 0 0 15px;
+    text-shadow: 0 0 10px #da7a4d, 0 0 20px #e5b084, 0 0 40px #e5b884, 0 0 80px #e5a784, 0 0 100px #e5b084, 0 0 140px #e5be84, 0 0 200px #e5b084, 0 0 300px #e5b384;
+}
+
+.hero-box .hero-text p {
+    letter-spacing: 0.04em;
+    color: #ffffff;
+    line-height: 1em;
+    text-align: center;
+    font-size: 30px;
+    margin: 0 0 80px;
+    text-shadow: 0 0 20px #e59784;
+}
+.btn.btn-primary {
+    background: #ffffff;
+    border-radius: 5px;
+    color: #e59284;
+    height: 55px;
+    font-family: "Raleway", sans-serif;
+    font-weight: 700;
+    font-size: 14px;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    padding: 0 40px;
+    border: 2px solid #7a3636;
+}
+
+    .btn.btn-primary:hover {
+        background: #e5a784;
+        color: #ffffff;
+    }
+
+    .btn.btn-danger {
+        background: transparent;
+        border-radius: 5px;
+        color: #943423;
+        height: 55px;
+        font-family: "Raleway", sans-serif;
+        font-weight: 500;
+        font-size: 14px;
+        letter-spacing: 0.04em;
+        text-transform: uppercase;
+        padding: 0 40px;
+        margin-top: 50px;
+        margin-left: 5px;
+        border: 1px solid #ffffff;
+    }
