@@ -1,8 +1,13 @@
 @import '../../styles/shared-styles.scss';
 
+.logo {
+    width: 70px;
+    height: 70px;
+}
+
 header {
-    background-color: rgba(0, 0, 0, 0);
-    color: rgb(173, 178, 203);
+    background-color: #71c8ce;
+    color: #ffffff; /* Updated to white for better contrast */
 }
 
 .navbar {
@@ -14,22 +19,26 @@ header {
 }
 
 .navbar .container .navbar-brand {
-    color: rgb(173, 178, 203);
+    color: #ffffff; /* Ensure the brand text is visible */
 }
 
 .navbar .container .navbar-nav .nav-link {
-    color: rgb(173, 178, 203);
+    font-weight: 900;
+    color: #ffffff; /* White color for nav links */
     border-radius: 18px;
     padding: 8px 16px;
+    font-size: 15px;
+    text-transform: uppercase; /* Uppercase all letters */
 }
 
 .navbar .container .navbar-nav .nav-link.active {
-    background-color: $shopapp-color !important;
-    color: white !important;
+    background-color: #ffffff; /* White background for active links */
+    color: #71c8ce !important; /* Complementary color for active links */
 }
+
 .nav-item.active {
-    background-color: $shopapp-color !important;
-    color: white !important;
+    background-color: #ffffff !important; /* Ensure active item background is white */
+    color: #71c8ce !important; /* Complementary color for active item text */
 }
 
 /* Add this CSS to your project's stylesheet */
@@ -37,17 +46,23 @@ header {
 .popover-list {
     padding: 10px;
 }
+
 .popover-body {
     padding: 0px;
 }
+
 .popover-item {
     display: block;
     margin-bottom: 5px;
     text-decoration: none;
-    color: #333;
+    color: #333; /* Keep text color consistent */
 }
 
 .popover-item:hover {
     background-color: #f0f0f0;
-    color: $shopapp-color;    
+    color: #71c8ce; /* Complementary color for hover effect */
+}
+
+.navbar-brand {
+    padding-left: 70px;
 }

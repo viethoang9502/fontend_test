@@ -148,7 +148,7 @@ export class OrderComponent implements OnInit{
           debugger;          
           console.error('Đặt hàng thành công');
           this.cartService.clearCart();
-          this.router.navigate(['/']);
+          this.router.navigate(['/home']);
         },
         complete: () => {
           debugger;

@@ -11,6 +11,7 @@ import { InsertProductAdminComponent } from "./product/insert/insert.product.adm
 import { InsertCategoryAdminComponent } from "./category/insert/insert.category.admin.component";
 import { UpdateCategoryAdminComponent } from "./category/update/update.category.admin.component";
 import { UserAdminComponent } from "./user/user.admin.component";
+import { GameSoccerComponent } from "../game-soccer/game-soccer.component";
 
 export const adminRoutes: Routes = [
     {
@@ -24,6 +25,10 @@ export const adminRoutes: Routes = [
             {
                 path: 'products',
                 component: ProductAdminComponent
+            },
+            {
+                path: 'gamesocers',
+                component: GameSoccerComponent
             },
             {
                 path: 'categories',

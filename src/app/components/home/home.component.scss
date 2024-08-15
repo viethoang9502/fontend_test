@@ -22,7 +22,7 @@
     margin-right: 10px;
     border-color: rgba(255, 255, 255, 0.5);
     color: #333333; 
-    box-shadow: 0 0 0 5px rgba(212, 8, 8, 0.3);
+    box-shadow: 0 0 0 5px rgba(51, 204, 255, 0.3);
 }
 
 .form-control {
@@ -78,14 +78,14 @@
     word-wrap: break-word;
 }
 .product-name:hover {
-    color: rgb(255, 196, 0);
+    color: #71c8ce;
 }
 .product-description {
     color: black;
 }
 
 .product-warranty {
-    color: $shopapp-tint-color;
+    color: #71c8ce;
 }
 
 .product-price {
@@ -112,6 +112,10 @@
     /*margin-top, margin-right, margin-bottom, margin-left*/
 }
 
+.extra-space {
+    height: 10px;
+  }
+
 .page-number {
     cursor: pointer;
     padding: 5px 10px;
@@ -121,47 +125,38 @@
 }
 
 .page-number.active {
-    background-color: $shopapp-color !important;
+    background-color: #71c8ce !important;
     color: #fff;
-    border-color: $shopapp-color !important;
+    border-color: #71c8ce !important;
 }
 .btn-primary {
-    background-color: $shopapp-color;
-    border-color: $shopapp-color;    
+    background-color: #71c8ce;
+    border-color: #71c8ce;    
 }
-.btn.btn-primary {
-    margin-left: 10px;
-}
-
 
 .hero-box {
     padding-top: 200px;
     position: relative; /* Make the hero box a relative element for absolute positioning */
-    background-image: url(https://images.foody.vn/res/g64/630562/prof/s/image-47a982d5-240109153849.jpeg);
+    background-image: url('/assets/images/poster.png');
     background-size: contain;
     background-position: center;
     background-attachment: fixed;
-    padding: 225px 0;
+    // background-repeat: no-repeat;
+    padding: 110px 0;
 }
 
-.hero-box .hero-text h1,
 .hero-box .hero-text p {
-    text-transform: uppercase;
     line-height: 1em;
     color: #ffffff;
 }
 
-.hero-box .hero-text h1 {
-    font-family: "Raleway", sans-serif;
-    letter-spacing: 0.08em;
-    color: #fff;
-    font-weight: 700;
-    text-align: center;
-    font-size: 72px;
-    line-height: 1em;
-    margin: 0 0 15px;
-    text-shadow: 0 0 10px #da7a4d, 0 0 20px #e5b084, 0 0 40px #e5b884, 0 0 80px #e5a784, 0 0 100px #e5b084, 0 0 140px #e5be84, 0 0 200px #e5b084, 0 0 300px #e5b384;
-}
+.hero-text .hero-title-image {
+    max-width: 100%;
+    height: auto;
+    display: inline-block;
+    width: 500px; /* Thiết lập chiều rộng cụ thể để tăng kích thước */
+    max-height: 300px; /* Thiết lập chiều cao tối đa để giữ tỷ lệ */
+  }
 
 .hero-box .hero-text p {
     letter-spacing: 0.04em;
@@ -170,39 +165,105 @@
     text-align: center;
     font-size: 30px;
     margin: 0 0 80px;
-    text-shadow: 0 0 20px #e59784;
+    text-shadow: 0 0 20px #71c8ce;
 }
-.btn.btn-primary {
-    background: #ffffff;
+
+.btn.btn-danger {
+    background: transparent;
     border-radius: 5px;
-    color: #e59284;
+    color: #71c8ce;
     height: 55px;
-    font-family: "Raleway", sans-serif;
-    font-weight: 700;
+    font-weight: 500;
     font-size: 14px;
     letter-spacing: 0.04em;
     text-transform: uppercase;
     padding: 0 40px;
-    border: 2px solid #7a3636;
+    margin-top: 50px;
+    margin-left: 5px;
+    border: 1px solid #ffffff;
 }
 
-    .btn.btn-primary:hover {
-        background: #e5a784;
-        color: #ffffff;
-    }
+.btn-category {
+    background-color: #ffffff;
+    border: 3px solid #71c8ce;
+    color: #333333;
+    padding: 10px 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50px; /* Bo tròn các góc */
+    transition: background-color 0.3s, color 0.3s, border-color 0.3s;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  }
+  
+  .btn-category:hover {
+    background-color: #71c8ce;
+    color: #ffffff;
+    border-color: #71c8ce;
+  }
+  
+  .btn-category .category-text {
+    font-weight: 900;
+  }
+  
+  .btn-category .category-logo {
+    width: 30px;
+    height: 30px;
+    margin-right: 10px;
+    border-radius: 50%; /* Bo tròn logo */
+  }
 
-    .btn.btn-danger {
-        background: transparent;
-        border-radius: 5px;
-        color: #943423;
-        height: 55px;
-        font-family: "Raleway", sans-serif;
-        font-weight: 500;
-        font-size: 14px;
-        letter-spacing: 0.04em;
-        text-transform: uppercase;
-        padding: 0 40px;
-        margin-top: 50px;
-        margin-left: 5px;
-        border: 1px solid #ffffff;
-    }
+  .hero-container {
+    text-align: center;
+  }
+  
+  .search-box {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 20px;
+  }
+  
+  .search-input {
+    width: 300px;
+    height: 50px;
+    padding: 10px 20px 10px 60px; /* Thêm khoảng trống bên trái cho biểu tượng */
+    border-radius: 25px;
+    border: 2px solid #FF9100;
+    box-shadow: 0 0 5px rgba(255, 145, 0, 0.5);
+    font-size: 18px;
+    color: #333333;
+    background-image: url('/assets/images/magnifying-glass-icon.png');
+    background-size: 40px 40px; /* Kích thước của biểu tượng */
+    background-position: 10px center; /* Vị trí của biểu tượng */
+    background-repeat: no-repeat; /* Không lặp lại biểu tượng */
+  }
+  
+  .search-input::placeholder {
+    color: #bfbfbf;
+    text-align: left; /* Đảm bảo placeholder không bị căn giữa */
+  }
+  
+  .search-button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 50px;
+    padding: 0 30px;
+    background-color: #FF9100; /* Màu cam */
+    border: none;
+    border-radius: 25px; /* Bo tròn các góc */
+    color: #ffffff; /* Màu chữ trắng */
+    font-size: 18px;
+    font-weight: bold;
+    font-family: 'Fredoka', sans-serif;
+    cursor: pointer;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    transition: background-color 0.3s ease;
+    background-color: #FFB347;
+  }
+  
+  .search-button:hover {
+    background-color: #FFB347;
+  }
+  

@@ -129,4 +129,9 @@ export class HomeComponent implements OnInit {
       // Điều hướng đến trang detail-product với productId là tham số
       this.router.navigate(['/products', productId]);
     }
+    
+    selectCategory(categoryId: number) {
+      this.selectedCategoryId = categoryId;
+      this.searchProducts();
+    }
 }
