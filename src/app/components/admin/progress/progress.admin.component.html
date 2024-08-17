@@ -36,19 +36,19 @@
           </tr>
         </thead>
         <tbody>
-          @for(order of orders; track order.id){
+          @for(progresses of progresses; track progresses.id){
             <tr>
               <td>              
-                {{ order.id }}</td>
-              <td>{{ order.user_id }}</td>
-              <td>{{ order.fullname }}</td>
-              <td>{{ order.email }}</td>
-              <td>{{ order.phone_number }}</td>
-              <td>{{ order.address }}</td>
-              <td>{{ order.note }}</td>
-              <td>{{ order.order_date | date }}</td>
-              <td>{{ order.status }}</td>
-              <td>{{ order.total_money }}</td>
+                {{ progresses.id }}</td>
+              <td>{{ progresses.user_id }}</td>
+              <td>{{ progresses.fullname }}</td>
+              <td>{{ progresses.email }}</td>
+              <td>{{ progresses.phone_number }}</td>
+              <td>{{ progresses.address }}</td>
+              <td>{{ progresses.note }}</td>
+              <td>{{ progresses.order_date | date }}</td>
+              <td>{{ progresses.status }}</td>
+              <td>{{ progresses.total_money }}</td>
               <!--
               <td>{{ order.shipping_method }}</td>
               <td>{{ order.shipping_address }}</td>
@@ -59,12 +59,12 @@
               <td>
                 <div style="display: flex; gap: 10px;">
                 <button 
-                  (click)="viewDetails(order)"
+                  (click)="viewDetails(progress)"
                       class="btn btn-primary">
                       View Details
                 </button>
                 <button class="btn btn-danger" 
-                  (click)="deleteOrder(order.id)"
+                  (click)="deleteProgress(progress.id)"
                   >Delete</button>                
                 </div>
               </td>                        

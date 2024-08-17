@@ -1,44 +1,44 @@
-<app-header></app-header>
-<div class="lesson-container">
-  <div class="lesson-header">
-    <h1 class="lesson-title">{{ product?.name }}</h1>
-    <p class="lesson-description">{{ product?.description }}</p>
-  </div>  
-  <div class="lesson-content" *ngIf="product && product.product_images && product.product_images.length > 0">
-    <div class="lesson-media">
-      <div class="media-container">
-        <img [src]="product.product_images[currentImageIndex].image_url" class="media-image" alt="Media Image">
-      </div>
-      <div *ngIf="product.product_images[currentImageIndex]?.video_url as videoUrl" class="video-container">
-        <video [src]="videoUrl" class="lesson-video" controls (timeupdate)="onTimeUpdate($event)"></video>
-      </div>
-    </div>
-    <div class="lesson-details">
-      <div class="media-controls">
-        <button class="btn btn-previous" (click)="previousImage()">
-          <i class="fas fa-chevron-left"></i> Previous
-        </button>
-        <div class="lesson-progress">
-          <label for="progress">Tiến trình:</label>
-          <input type="range" id="progress" [value]="progress" min="0" max="100" readonly>
+  <app-header></app-header>
+  <div class="lesson-container">
+    <div class="lesson-header">
+      <h1 class="lesson-title">{{ lesson?.name }}</h1>
+      <p class="lesson-description">{{ lesson?.description }}</p>
+    </div>  
+    <div class="lesson-content" *ngIf="lesson && lesson.lesson_images && lesson.lesson_images.length > 0">
+      <div class="lesson-media">
+        <div class="media-container">
+          <img [src]="lesson.lesson_images[currentImageIndex].image_url" class="media-image" alt="Media Image">
         </div>
-        <button class="btn btn-next" (click)="nextImage()">
-          Next&nbsp;
-          <i class="fas fa-chevron-right"></i>
-        </button>        
+        <div *ngIf="lesson.lesson_images[currentImageIndex]?.video_url as videoUrl" class="video-container">
+          <video [src]="videoUrl" class="lesson-video" controls (timeupdate)="onTimeUpdate($event)"></video>
+        </div>
       </div>
-      <div class="lesson-actions">
-        <button class="btn btn-favorite" (click)="addToCart()">
-          <i class="fas fa-heart"></i> Yêu thích
-        </button>
-        <button class="btn btn-start" (click)="buyNow()">
-          <i class="fas fa-play"></i> Theo dõi
-        </button>
-        <button class="btn btn-game" (click)="startGame()">
-          <i class="fas fa-puzzle-piece"></i> Trò chơi
-        </button>
-      </div>
-    </div>    
+      <div class="lesson-details">
+        <div class="media-controls">
+          <button class="btn btn-previous" (click)="previousImage()">
+            <i class="fas fa-chevron-left"></i> Previous
+          </button>
+          <div class="lesson-progress">
+            <label for="progress">Tiến trình:</label>
+            <input type="range" id="progress" [value]="progress" min="0" max="100" readonly>
+          </div>
+          <button class="btn btn-next" (click)="nextImage()">
+            Next&nbsp;
+            <i class="fas fa-chevron-right"></i>
+          </button>        
+        </div>
+        <div class="lesson-actions">
+          <button class="btn btn-favorite" (click)="addToCart()">
+            <i class="fas fa-heart"></i> Yêu thích
+          </button>
+          <button class="btn btn-start" (click)="buyNow()">
+            <i class="fas fa-play"></i> Theo dõi
+          </button>
+          <button class="btn btn-game" (click)="startGame()">
+            <i class="fas fa-puzzle-piece"></i> Trò chơi
+          </button>
+        </div>
+      </div>    
+    </div>
   </div>
-</div>
-<app-footer></app-footer>
+  <app-footer></app-footer>

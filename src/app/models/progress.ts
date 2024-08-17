@@ -1,5 +1,5 @@
-import {OrderDetail} from './order.detail'
-export interface Order {
+import {ProgressDetail} from './progress.detail'
+export interface Progress {
     id: number;
     user_id: number;
     fullname: string; 
@@ -16,5 +16,5 @@ export interface Order {
     tracking_number: string; 
     payment_method: string; 
     active: boolean;
-    order_details: OrderDetail[]; 
+    progress_details: ProgressDetail[]; 
   }  

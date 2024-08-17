@@ -1,5 +1,5 @@
 import { Injectable, Inject } from '@angular/core';
-import { Product } from '../models/product';
+import { Lesson } from '../models/lesson';
 import { CommonModule, DOCUMENT } from '@angular/common';
 
 @Injectable({

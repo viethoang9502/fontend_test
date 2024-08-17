@@ -4,7 +4,7 @@ import { OnInit } from '@angular/core';
 import { InsertProductDTO } from '../../../../dtos/product/insert.product.dto';
 import { Category } from '../../../../models/category';
 import { CategoryService } from '../../../../services/category.service';
-import { ProductService } from '../../../../services/product.service';
+import { LessonService } from '../../../../services/lesson.service';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { ApiResponse } from '../../../../responses/api.response';
@@ -33,7 +33,7 @@ export class InsertProductAdminComponent implements OnInit {
     private route: ActivatedRoute,
     private router: Router,
     private categoryService: CategoryService,    
-    private productService: ProductService,    
+    private productService: LessonService,    
   ) {
     
   } 

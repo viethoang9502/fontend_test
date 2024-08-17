@@ -5,25 +5,25 @@ import { NgModule } from '@angular/core';
 
 import { Observable } from 'rxjs';
 import { Location } from '@angular/common';
-import { OrderResponse } from '../../../responses/order/order.response';
-import { OrderService } from '../../../services/order.service';
+import { ProgressResponse } from '../../../responses/progress/progress.response';
+import { ProgressService } from '../../../services/progress.service';
 import { CommonModule,DOCUMENT } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { ApiResponse } from '../../../responses/api.response';
 import { HttpClient, HttpHeaders, HttpErrorResponse } from '@angular/common/http';
 
 @Component({
-  selector: 'app-order-admin',
-  templateUrl: './order.admin.component.html',
-  styleUrls: ['./order.admin.component.scss'],
+  selector: 'app-progress-admin',
+  templateUrl: './progress.admin.component.html',
+  styleUrls: ['./progress.admin.component.scss'],
   standalone: true,
   imports: [   
     CommonModule,
     FormsModule,
   ]
 })
-export class OrderAdminComponent implements OnInit{  
-  orders: OrderResponse[] = [];
+export class ProgressAdminComponent implements OnInit{  
+  progresses: ProgressResponse[] = [];
   currentPage: number = 0;
   itemsPerPage: number = 12;
   pages: number[] = [];
@@ -33,7 +33,7 @@ export class OrderAdminComponent implements OnInit{
   localStorage?:Storage;
 
   constructor(
-    private orderService: OrderService,
+    private progressService: ProgressService,
     private router: Router,
     private route: ActivatedRoute,
     private location: Location,
@@ -55,10 +55,10 @@ export class OrderAdminComponent implements OnInit{
   }
   getAllOrders(keyword: string, page: number, limit: number) {
     debugger
-    this.orderService.getAllOrders(keyword, page, limit).subscribe({
+    this.progressService.getAllOrders(keyword, page, limit).subscribe({
       next: (apiResponse: ApiResponse) => {
         debugger        
-        this.orders = apiResponse.data.orders;
+        this.progresses = apiResponse.data.orders;
         this.totalPages = apiResponse.data.totalPages;
         this.visiblePages = this.generateVisiblePageArray(this.currentPage, this.totalPages);
       },
@@ -93,12 +93,12 @@ export class OrderAdminComponent implements OnInit{
         .map((_, index) => startPage + index);
   }
 
-  deleteOrder(id:number) {
+  deleteProgress(id:number) {
     const confirmation = window
       .confirm('Are you sure you want to delete this order?');
     if (confirmation) {
       debugger
-      this.orderService.deleteOrder(id).subscribe({
+      this.progressService.deleteOrder(id).subscribe({
         next: (response: ApiResponse) => {
           debugger 
           location.reload();          
@@ -113,9 +113,9 @@ export class OrderAdminComponent implements OnInit{
       });    
     }
   }
-  viewDetails(order:OrderResponse) {
+  viewDetails(progress:ProgressResponse) {
     debugger
-    this.router.navigate(['/admin/orders', order.id]);
+    this.router.navigate(['/admin/orders', progress.id]);
   }
   
 }

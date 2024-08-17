@@ -7,7 +7,7 @@
       </div>
       <div class="search-box">
         <input type="text" class="form-control search-input" placeholder="   Chữ cái" [(ngModel)]="keyword">
-        <button class="btn btn-primary search-button" (click)="searchProducts()">
+        <button class="btn btn-primary search-button" (click)="searchLessons()">
           <span>SEARCH</span>
         </button>
       </div>
@@ -30,12 +30,12 @@
 </div>
   <div class="container">
     <div class="row">
-      <div class="col-lg-3 col-md-6" *ngFor="let product of products">
-        <div class="product-item" (click)="onProductClick(product.id)">
-          <img [src]="product.url" alt="Product Image" class="product-image">
-          <h3 class="product-name">{{ product.name }}</h3>
-          <p class="product-description">{{ product.description }}</p>
-          <p class="product-price">{{ product.price }} ĐIỂM</p>
+      <div class="col-lg-3 col-md-6" *ngFor="let lesson of lessons">
+        <div class="lesson-item" (click)="onLessonClick(lesson.id)">
+          <img [src]="lesson.url" alt="lesson Image" class="lesson-image">
+          <h3 class="lesson-name">{{ lesson.name }}</h3>
+          <p class="lesson-description">{{ lesson.description }}</p>
+          <p class="lesson-price">{{ lesson.price }} ĐIỂM</p>
         </div>
       </div>
     </div>

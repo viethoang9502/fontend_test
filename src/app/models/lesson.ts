@@ -1,5 +1,5 @@
-import { ProductImage } from "./product.image";
-export interface Product {
+import { LessonImage } from "./lesson.image";
+export interface Lesson {
   id: number;
   name: string;
   price: number;
@@ -7,8 +7,8 @@ export interface Product {
   description: string;
   category_id: number;
   url: string;
-  product_images: ProductImage[];
+  lesson_images: LessonImage[];
 }
 
   
-  
+    

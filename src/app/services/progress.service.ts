@@ -1,4 +1,4 @@
-import { ProductService } from './product.service';
+import { LessonService } from './lesson.service';
 import { Injectable } from '@angular/core';
 import { 
   HttpClient, 
@@ -7,20 +7,20 @@ import {
 } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { environment } from '../../environments/environment';
-import { OrderDTO } from '../dtos/order/order.dto';
-import { OrderResponse } from '../responses/order/order.response';
+import { ProgressDTO } from '../dtos/progress/order.dto';
+import { ProgressResponse } from '../responses/progress/progress.response';
 import { ApiResponse } from '../responses/api.response';
 
 @Injectable({
   providedIn: 'root',
 })
-export class OrderService {
+export class ProgressService {
   private apiUrl = `${environment.apiBaseUrl}/orders`;
   private apiGetAllOrders = `${environment.apiBaseUrl}/orders/get-orders-by-keyword`;
 
   constructor(private http: HttpClient) {}
 
-  placeOrder(orderData: OrderDTO): Observable<ApiResponse> {    
+  placeOrder(orderData: ProgressDTO): Observable<ApiResponse> {    
     // Gửi yêu cầu đặt hàng
     return this.http.post<ApiResponse>(this.apiUrl, orderData);
   }
@@ -37,7 +37,7 @@ export class OrderService {
       .set('limit', limit.toString());            
       return this.http.get<ApiResponse>(this.apiGetAllOrders, { params });
   }
-  updateOrder(orderId: number, orderData: OrderDTO): Observable<ApiResponse> {
+  updateOrder(orderId: number, orderData: ProgressDTO): Observable<ApiResponse> {
     const url = `${environment.apiBaseUrl}/orders/${orderId}`;
     return this.http.put<ApiResponse>(url, orderData);
   }

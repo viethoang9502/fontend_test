@@ -8,16 +8,16 @@ import { inject } from '@angular/core';
 
 import { Observable } from 'rxjs';
 import { environment } from '../../../../environments/environment';
-import { OrderDTO } from '../../../dtos/order/order.dto';
-import { OrderResponse } from '../../../responses/order/order.response';
-import { OrderService } from '../../../services/order.service';
+import { ProgressDTO } from '../../../dtos/progress/order.dto';
+import { ProgressResponse } from '../../../responses/progress/progress.response';
+import { ProgressService } from '../../../services/progress.service';
 import { ApiResponse } from '../../../responses/api.response';
 import { HttpClient, HttpHeaders, HttpErrorResponse } from '@angular/common/http';
 
 @Component({
-  selector: 'app-detail-order-admin',
-  templateUrl: './detail.order.admin.component.html',
-  styleUrls: ['./detail.order.admin.component.scss'],
+  selector: 'app-detail-progress-admin',
+  templateUrl: './detail.progress.admin.component.html',
+  styleUrls: ['./detail.progress.admin.component.scss'],
   standalone: true,
   imports: [   
     CommonModule,
@@ -25,9 +25,9 @@ import { HttpClient, HttpHeaders, HttpErrorResponse } from '@angular/common/http
   ]
 })
 
-export class DetailOrderAdminComponent implements OnInit{    
+export class DetailProgressAdminComponent implements OnInit{    
   orderId:number = 0;
-  orderResponse: OrderResponse = {
+  progressResponse: ProgressResponse = {
     id: 0, // Hoặc bất kỳ giá trị số nào bạn muốn
     user_id: 0,
     fullname: '',
@@ -42,10 +42,10 @@ export class DetailOrderAdminComponent implements OnInit{
     shipping_address: '',
     shipping_date: new Date(),
     payment_method: '',
-    order_details: [],
+    progress_details: [],
     
   };  
-  private orderService = inject(OrderService);
+  private progressService = inject(ProgressService);
   constructor(    
     private route: ActivatedRoute,
     private router: Router
@@ -58,42 +58,42 @@ export class DetailOrderAdminComponent implements OnInit{
   getOrderDetails(): void {
     debugger
     this.orderId = Number(this.route.snapshot.paramMap.get('id'));
-    this.orderService.getOrderById(this.orderId).subscribe({
+    this.progressService.getOrderById(this.orderId).subscribe({
       next: (apiResponse: ApiResponse) => {        
         debugger;       
         const response = apiResponse.data    
-        this.orderResponse.id = response.id;
-        this.orderResponse.user_id = response.user_id;
-        this.orderResponse.fullname = response.fullname;
-        this.orderResponse.email = response.email;
-        this.orderResponse.phone_number = response.phone_number;
-        this.orderResponse.address = response.address; 
-        this.orderResponse.note = response.note;
-        this.orderResponse.total_money = response.total_money;
+        this.progressResponse.id = response.id;
+        this.progressResponse.user_id = response.user_id;
+        this.progressResponse.fullname = response.fullname;
+        this.progressResponse.email = response.email;
+        this.progressResponse.phone_number = response.phone_number;
+        this.progressResponse.address = response.address; 
+        this.progressResponse.note = response.note;
+        this.progressResponse.total_money = response.total_money;
         if (response.order_date) {
-          this.orderResponse.order_date = new Date(
+          this.progressResponse.order_date = new Date(
             response.order_date[0], 
             response.order_date[1] - 1, 
             response.order_date[2]
           );        
         }        
-        this.orderResponse.order_details = response.order_details
+        this.progressResponse.progress_details = response.order_details
           .map((order_detail:any) => {
-          order_detail.product.thumbnail = `${environment.apiBaseUrl}/products/images/${order_detail.product.thumbnail}`;
-          order_detail.number_of_products = order_detail.numberOfProducts
+          order_detail.product.thumbnail = `${environment.apiBaseUrl}/Lessons/images/${order_detail.product.thumbnail}`;
+          order_detail.number_of_Lessons = order_detail.numberOfLessons
           //order_detail.total_money = order_detail.totalMoney
           return order_detail;
         });        
-        this.orderResponse.payment_method = response.payment_method;
+        this.progressResponse.payment_method = response.payment_method;
         if (response.shipping_date) {
-          this.orderResponse.shipping_date = new Date(
+          this.progressResponse.shipping_date = new Date(
             response.shipping_date[0],
             response.shipping_date[1] - 1,
             response.shipping_date[2]
           );
         }         
-        this.orderResponse.shipping_method = response.shipping_method;        
-        this.orderResponse.status = response.status;     
+        this.progressResponse.shipping_method = response.shipping_method;        
+        this.progressResponse.status = response.status;     
         debugger   
       },      
       complete: () => {
@@ -108,8 +108,8 @@ export class DetailOrderAdminComponent implements OnInit{
   
   saveOrder(): void {    
     debugger        
-    this.orderService
-      .updateOrder(this.orderId, new OrderDTO(this.orderResponse))
+    this.progressService
+      .updateOrder(this.orderId, new ProgressDTO(this.progressResponse))
       .subscribe({
       next: (response: ApiResponse) => {
         debugger

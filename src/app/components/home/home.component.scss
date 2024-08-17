@@ -13,7 +13,7 @@
     margin-bottom: 20px;
 }
 
-.product-category {
+.lesson-category {
     width: 200px;
 }
 
@@ -48,7 +48,7 @@
     color: rgba(255, 255, 255, 0.5);
 }
 
-.product-item {
+.lesson-item {
     background-color: #ffffff;
     border: 1px solid rgb(238, 238, 235);
     border-radius: 20px;
@@ -56,13 +56,13 @@
     margin-bottom: 20px;
 }
 
-.product-image {
+.lesson-image {
     width: 100%;
     height: 300px;
     margin-bottom: 10px;
 }
 
-.product-name {
+.lesson-name {
     text-transform: uppercase;
     word-wrap: break-word;
     margin: 5px 0;
@@ -77,18 +77,18 @@
     -webkit-box-orient: vertical;
     word-wrap: break-word;
 }
-.product-name:hover {
+.lesson-name:hover {
     color: #71c8ce;
 }
-.product-description {
+.lesson-description {
     color: black;
 }
 
-.product-warranty {
+.lesson-warranty {
     color: #71c8ce;
 }
 
-.product-price {
+.lesson-price {
     text-transform: uppercase;
     font-weight: 900;
     color: #e31837;
@@ -96,12 +96,12 @@
     text-align: center;
 }
 
-.product-rating {
+.lesson-rating {
     color: #FFD700;
     margin-top: 10px;
 }
 
-.product-actions {
+.lesson-actions {
     display: flex;
     justify-content: center;
     margin-top: 20px;

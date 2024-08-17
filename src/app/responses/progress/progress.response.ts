@@ -1,6 +1,6 @@
-import { OrderDetail } from "../../models/order.detail";
+import { ProgressDetail } from "../../models/progress.detail";
 
-export interface OrderResponse {
+export interface ProgressResponse {
     id: number;
     user_id: number;
     fullname: string;
@@ -15,7 +15,7 @@ export interface OrderResponse {
     shipping_address: string;
     shipping_date: Date; // Dạng chuỗi ISO 8601
     payment_method: string;
-    order_details: OrderDetail[]; // Đảm bảo có một interface OrderDetail tương ứng
+    progress_details: ProgressDetail[];
   }
   
   

@@ -67,8 +67,8 @@
                             <tr>
                                 <td>
                                     <div class="product-info">
-                                        <img [src]="item.product.thumbnail" alt="Lesson Image" class="product-image">
-                                        <span class="product-name">{{ item.product.name }}</span>
+                                        <img [src]="item.lesson.thumbnail" alt="Lesson Image" class="product-image">
+                                        <span class="product-name">{{ item.lesson.name }}</span>
                                     </div>
                                 </td>
                                 <td>
@@ -80,8 +80,8 @@
                                         </div>
                                     </div>
                                 </td>
-                                <td>{{ item.product.price | number:'1.2-2' }}</td>
-                                <td>{{ (item.product.price * item.quantity) | number:'1.2-2' }}</td>
+                                <td>{{ item.lesson.price | number:'1.2-2' }}</td>
+                                <td>{{ (item.lesson.price * item.quantity) | number:'1.2-2' }}</td>
                                 <td>
                                     <button class="btn btn-danger" (click)="confirmDelete(i)">
                                         Xóa

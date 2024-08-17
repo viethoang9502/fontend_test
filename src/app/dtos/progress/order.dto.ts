@@ -8,7 +8,7 @@ import { IsString,
 import { Type } from 'class-transformer';
 import { CartItemDTO } from './cart.item.dto';
 
-export class OrderDTO {
+export class ProgressDTO {
   user_id: number;
 
   fullname: string;

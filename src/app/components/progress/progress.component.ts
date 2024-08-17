@@ -1,14 +1,14 @@
 import { Component, OnInit } from '@angular/core';
-import { Product } from '../../models/product';
+import { Lesson } from '../../models/lesson';
 import { CartService } from '../../services/cart.service';
-import { ProductService } from '../../services/product.service';
-import { OrderService } from '../../services/order.service';
+import { LessonService } from '../../services/lesson.service';
+import { ProgressService } from '../../services/progress.service';
 import { TokenService } from '../../services/token.service';
 import { environment } from '../../../environments/environment';
-import { OrderDTO } from '../../dtos/order/order.dto';
+import { ProgressDTO } from '../../dtos/progress/order.dto';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router, ActivatedRoute } from '@angular/router';
-import { Order } from '../../models/order';
+import { Progress } from '../../models/progress';
 
 import { HeaderComponent } from '../header/header.component';
 import { FooterComponent } from '../footer/footer.component';
@@ -20,9 +20,9 @@ import { ApiResponse } from '../../responses/api.response';
 import { HttpClient, HttpHeaders, HttpErrorResponse } from '@angular/common/http';
 
 @Component({
-  selector: 'app-order',
-  templateUrl: './order.component.html',
-  styleUrls: ['./order.component.scss'],
+  selector: 'app-progress',
+  templateUrl: './progress.component.html',
+  styleUrls: ['./progress.component.scss'],
   standalone: true,
   imports: [
     FooterComponent,
@@ -33,22 +33,22 @@ import { HttpClient, HttpHeaders, HttpErrorResponse } from '@angular/common/http
   ]
 })
 
-export class OrderComponent implements OnInit{
+export class ProgressComponent implements OnInit{
   private couponService = inject(CouponService);
   private cartService = inject(CartService);
-  private productService = inject(ProductService);
-  private orderService = inject(OrderService);
+  private lessonService = inject(LessonService);
+  private progressService = inject(ProgressService);
   private tokenService = inject(TokenService);
   private formBuilder = inject(FormBuilder);
   private router = inject(Router);
 
   orderForm: FormGroup; // Đối tượng FormGroup để quản lý dữ liệu của form
-  cartItems: { product: Product, quantity: number }[] = [];
+  cartItems: { lesson: Lesson, quantity: number }[] = [];
   totalAmount: number = 0; // Tổng tiền
   couponDiscount: number = 0; //số tiền được discount từ coupon
   couponApplied: boolean = false;
   cart: Map<number, number> = new Map();
-  orderData: OrderDTO = {
+  orderData: ProgressDTO = {
     user_id: 0, // Thay bằng user_id thích hợp
     fullname: '', // Khởi tạo rỗng, sẽ được điền từ form
     email: '', // Khởi tạo rỗng, sẽ được điền từ form    
@@ -84,27 +84,27 @@ export class OrderComponent implements OnInit{
     // Lấy danh sách sản phẩm từ giỏ hàng
     debugger
     this.cart = this.cartService.getCart();
-    const productIds = Array.from(this.cart.keys()); // Chuyển danh sách ID từ Map giỏ hàng    
+    const lessonIds = Array.from(this.cart.keys()); // Chuyển danh sách ID từ Map giỏ hàng    
 
     // Gọi service để lấy thông tin sản phẩm dựa trên danh sách ID
     debugger    
-    if(productIds.length === 0) {
+    if(lessonIds.length === 0) {
       return;
     }    
-    this.productService.getProductsByIds(productIds).subscribe({
+    this.lessonService.getLessonsByIds(lessonIds).subscribe({
       next: (apiResponse: ApiResponse) => {            
         debugger
-        const products: Product[] = apiResponse.data
+        const lessons: Lesson[] = apiResponse.data
         // Lấy thông tin sản phẩm và số lượng từ danh sách sản phẩm và giỏ hàng
-        this.cartItems = productIds.map((productId) => {
+        this.cartItems = lessonIds.map((lessonId) => {
           debugger
-          const product = products.find((p) => p.id === productId);
-          if (product) {
-            product.thumbnail = `${environment.apiBaseUrl}/products/images/${product.thumbnail}`;
+          const lesson = lessons.find((p) => p.id === lessonId);
+          if (lesson) {
+            lesson.thumbnail = `${environment.apiBaseUrl}/Lessons/images/${lesson.thumbnail}`;
           }          
           return {
-            product: product!,
-            quantity: this.cart.get(productId)!
+            lesson: lesson!,
+            quantity: this.cart.get(lessonId)!
           };
         });
         console.log('haha');
@@ -138,12 +138,12 @@ export class OrderComponent implements OnInit{
         ...this.orderForm.value
       };
       this.orderData.cart_items = this.cartItems.map(cartItem => ({
-        product_id: cartItem.product.id,
+        product_id: cartItem.lesson.id,
         quantity: cartItem.quantity
       }));
       this.orderData.total_money =  this.totalAmount;
       // Dữ liệu hợp lệ, bạn có thể gửi đơn hàng đi
-      this.orderService.placeOrder(this.orderData).subscribe({
+      this.progressService.placeOrder(this.orderData).subscribe({
         next: (response: ApiResponse) => {
           debugger;          
           console.error('Đặt hàng thành công');
@@ -184,7 +184,7 @@ export class OrderComponent implements OnInit{
   // Hàm tính tổng tiền
   calculateTotal(): void {
       this.totalAmount = this.cartItems.reduce(
-          (total, item) => total + item.product.price * item.quantity,
+          (total, item) => total + item.lesson.price * item.quantity,
           0
       );
   }
@@ -216,7 +216,7 @@ export class OrderComponent implements OnInit{
   private updateCartFromCartItems(): void {
     this.cart.clear();
     this.cartItems.forEach((item) => {
-      this.cart.set(item.product.id, item.quantity);
+      this.cart.set(item.lesson.id, item.quantity);
     });
     this.cartService.setCart(this.cart);
   }

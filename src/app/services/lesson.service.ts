@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { environment } from '../../environments/environment';
-import { Product } from '../models/product';
+import { Lesson } from '../models/lesson';
 import { UpdateProductDTO } from '../dtos/product/update.product.dto';
 import { InsertProductDTO } from '../dtos/product/insert.product.dto';
 import { ApiResponse } from '../responses/api.response';
@@ -10,12 +10,12 @@ import { ApiResponse } from '../responses/api.response';
 @Injectable({
   providedIn: 'root'
 })
-export class ProductService {
+export class LessonService {
   private apiBaseUrl = environment.apiBaseUrl;
 
   constructor(private http: HttpClient) { }
 
-  getProducts(
+  getLessons(
     keyword: string,
     categoryId: number,
     page: number,
@@ -27,39 +27,39 @@ export class ProductService {
       page: page.toString(),
       limit: limit.toString()
     };
-    return this.http.get<ApiResponse>(`${this.apiBaseUrl}/products`, { params });
+    return this.http.get<ApiResponse>(`${this.apiBaseUrl}/lessons`, { params });
   }
 
   getDetailProduct(productId: number): Observable<ApiResponse> {
-    return this.http.get<ApiResponse>(`${this.apiBaseUrl}/products/${productId}`);
+    return this.http.get<ApiResponse>(`${this.apiBaseUrl}/lessons/${productId}`);
   }
 
-  getProductsByIds(productIds: number[]): Observable<ApiResponse> {
+  getLessonsByIds(productIds: number[]): Observable<ApiResponse> {
     const params = new HttpParams().set('ids', productIds.join(','));
-    return this.http.get<ApiResponse>(`${this.apiBaseUrl}/products/by-ids`, { params });
+    return this.http.get<ApiResponse>(`${this.apiBaseUrl}/lessons/by-ids`, { params });
   }
 
   deleteProduct(productId: number): Observable<ApiResponse> {
-    return this.http.delete<ApiResponse>(`${this.apiBaseUrl}/products/${productId}`);
+    return this.http.delete<ApiResponse>(`${this.apiBaseUrl}/lessons/${productId}`);
   }
 
   updateProduct(productId: number, updatedProduct: UpdateProductDTO): Observable<ApiResponse> {
-    return this.http.put<ApiResponse>(`${this.apiBaseUrl}/products/${productId}`, updatedProduct);
+    return this.http.put<ApiResponse>(`${this.apiBaseUrl}/lessons/${productId}`, updatedProduct);
   }  
 
   insertProduct(insertProductDTO: InsertProductDTO): Observable<ApiResponse> {
-    return this.http.post<ApiResponse>(`${this.apiBaseUrl}/products`, insertProductDTO);
+    return this.http.post<ApiResponse>(`${this.apiBaseUrl}/lessons`, insertProductDTO);
   }
 
-  uploadImages(productId: number, files: File[]): Observable<ApiResponse> {
+  uploadImages(lessonId: number, files: File[]): Observable<ApiResponse> {
     const formData = new FormData();
     for (let i = 0; i < files.length; i++) {
       formData.append('files', files[i]);
     }
-    return this.http.post<ApiResponse>(`${this.apiBaseUrl}/products/uploads/${productId}`, formData);
+    return this.http.post<ApiResponse>(`${this.apiBaseUrl}/lessons/uploads/${lessonId}`, formData);
   }
 
   deleteProductImage(id: number): Observable<any> {
-    return this.http.delete<string>(`${this.apiBaseUrl}/product_images/${id}`);
+    return this.http.delete<string>(`${this.apiBaseUrl}/lesson_images/${id}`);
   }
 }

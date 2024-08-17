@@ -1,10 +1,10 @@
 import { Component, OnInit, Inject } from '@angular/core';
-import { Product } from '../../models/product';
+import { Lesson } from '../../models/lesson';
 import { Category } from '../../models/category';
 import { Router } from '@angular/router';
 import { environment } from '../../../environments/environment';
 import { CategoryService } from '../../services/category.service';
-import { ProductService } from '../../services/product.service';
+import { LessonService } from '../../services/lesson.service';
 import { TokenService } from '../../services/token.service';
 import { ApiResponse } from '../../responses/api.response';
 
@@ -27,7 +27,7 @@ import { HttpClient, HttpHeaders, HttpErrorResponse } from '@angular/common/http
   ]
 })
 export class HomeComponent implements OnInit {
-  products: Product[] = [];
+  lessons: Lesson[] = [];
   categories: Category[] = []; // Dữ liệu động từ categoryService
   selectedCategoryId: number  = 0; // Giá trị category được chọn
   currentPage: number = 0;
@@ -40,7 +40,7 @@ export class HomeComponent implements OnInit {
   apiBaseUrl = environment.apiBaseUrl;
 
   constructor(
-    private productService: ProductService,
+    private lessonService: LessonService,
     private categoryService: CategoryService,    
     private router: Router,
     private tokenService: TokenService,
@@ -51,7 +51,7 @@ export class HomeComponent implements OnInit {
 
     ngOnInit() {
       this.currentPage = Number(this.localStorage?.getItem('currentProductPage')) || 0; 
-      this.getProducts(this.keyword, this.selectedCategoryId, this.currentPage, this.itemsPerPage);
+      this.getLessons(this.keyword, this.selectedCategoryId, this.currentPage, this.itemsPerPage);
       this.getCategories(0, 100);
     }
     
@@ -71,25 +71,32 @@ export class HomeComponent implements OnInit {
       });
     }
     
-    searchProducts() {
+    searchLessons() {
       this.currentPage = 0;
       this.itemsPerPage = 12;
       debugger;
-      this.getProducts(this.keyword, this.selectedCategoryId, this.currentPage, this.itemsPerPage);
+      this.getLessons(this.keyword, this.selectedCategoryId, this.currentPage, this.itemsPerPage);
     }
     
-    getProducts(keyword: string, selectedCategoryId: number, page: number, limit: number) {
+    getLessons(keyword: string, selectedCategoryId: number, page: number, limit: number) {
       debugger;
-      this.productService.getProducts(keyword, selectedCategoryId, page, limit).subscribe({
+      this.lessonService.getLessons(keyword, selectedCategoryId, page, limit).subscribe({
         next: (apiresponse: ApiResponse) => {
           debugger;
           const response = apiresponse.data;
-          response.products.forEach((product: Product) => {          
-            product.url = `${environment.apiBaseUrl}/products/images/${product.thumbnail}`;
-          });
-          this.products = response.products;
-          this.totalPages = response.totalPages;
-          this.visiblePages = this.generateVisiblePageArray(this.currentPage, this.totalPages);
+          // Ensure response and response.Lessons are defined
+          console.log('Response:', response);
+
+          if (response && Array.isArray(response.lessons)) {
+            response.lessons.forEach((lesson: Lesson) => {
+              lesson.url = `${environment.apiBaseUrl}/products/images/${lesson.thumbnail}`;
+            });
+            this.lessons = response.lessons;
+            this.totalPages = response.totalPages;
+            this.visiblePages = this.generateVisiblePageArray(this.currentPage, this.totalPages);
+          } else {
+            console.error('Lessons data is missing or is not an array');
+          }
         },
         complete: () => {
           debugger;
@@ -98,14 +105,15 @@ export class HomeComponent implements OnInit {
           debugger;
           console.error(error?.error?.message ?? '');
         }
-      });    
+      });
     }
+    
     
     onPageChange(page: number) {
       debugger;
       this.currentPage = page < 0 ? 0 : page;
       this.localStorage?.setItem('currentProductPage', String(this.currentPage)); 
-      this.getProducts(this.keyword, this.selectedCategoryId, this.currentPage, this.itemsPerPage);
+      this.getLessons(this.keyword, this.selectedCategoryId, this.currentPage, this.itemsPerPage);
     }
     
     generateVisiblePageArray(currentPage: number, totalPages: number): number[] {
@@ -124,14 +132,14 @@ export class HomeComponent implements OnInit {
     }
     
     // Hàm xử lý sự kiện khi sản phẩm được bấm vào
-    onProductClick(productId: number) {
+    onLessonClick(lessonId: number) {
       debugger;
       // Điều hướng đến trang detail-product với productId là tham số
-      this.router.navigate(['/products', productId]);
+      this.router.navigate(['/lessons', lessonId]);
     }
     
     selectCategory(categoryId: number) {
       this.selectedCategoryId = categoryId;
-      this.searchProducts();
+      this.searchLessons();
     }
 }

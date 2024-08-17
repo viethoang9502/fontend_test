@@ -4,8 +4,8 @@ import { DOCUMENT } from '@angular/common';
 
 import { Location } from '@angular/common';
 import { environment } from '../../../../environments/environment';
-import { Product } from '../../../models/product';
-import { ProductService } from '../../../services/product.service';
+import { Lesson } from '../../../models/lesson';
+import { LessonService } from '../../../services/lesson.service';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { ApiResponse } from '../../../responses/api.response';
@@ -13,10 +13,10 @@ import { HttpClient, HttpHeaders, HttpErrorResponse } from '@angular/common/http
 
 
 @Component({
-  selector: 'app-product-admin',
-  templateUrl: './product.admin.component.html',
+  selector: 'app-lesson-admin',
+  templateUrl: './lesson.admin.component.html',
   styleUrls: [
-    './product.admin.component.scss',        
+    './lesson.admin.component.scss',        
   ],
   standalone: true,
   imports: [   
@@ -24,9 +24,9 @@ import { HttpClient, HttpHeaders, HttpErrorResponse } from '@angular/common/http
     FormsModule,
   ]
 })
-export class ProductAdminComponent implements OnInit {
+export class LessonAdminComponent implements OnInit {
     selectedCategoryId: number  = 0; // Giá trị category được chọn
-    products: Product[] = [];        
+    lessons: Lesson[] = [];        
     currentPage: number = 0;
     itemsPerPage: number = 12;
     pages: number[] = [];
@@ -35,7 +35,7 @@ export class ProductAdminComponent implements OnInit {
     keyword:string = "";
     localStorage?:Storage;
 
-    private productService = inject(ProductService);
+    private LessonService = inject(LessonService);
     private router = inject(Router);
     private location = inject(Location);
 
@@ -46,29 +46,29 @@ export class ProductAdminComponent implements OnInit {
     }
     ngOnInit() {
       this.currentPage = Number(this.localStorage?.getItem('currentProductAdminPage')) || 0; 
-      this.getProducts(this.keyword, 
+      this.getLessons(this.keyword, 
         this.selectedCategoryId, 
         this.currentPage, this.itemsPerPage);      
     }    
-    searchProducts() {
+    searchLessons() {
       this.currentPage = 0;
       this.itemsPerPage = 12;
       //Mediocre Iron Wallet
       debugger
-      this.getProducts(this.keyword.trim(), this.selectedCategoryId, this.currentPage, this.itemsPerPage);
+      this.getLessons(this.keyword.trim(), this.selectedCategoryId, this.currentPage, this.itemsPerPage);
     }
-    getProducts(keyword: string, selectedCategoryId: number, page: number, limit: number) {
+    getLessons(keyword: string, selectedCategoryId: number, page: number, limit: number) {
       debugger
-      this.productService.getProducts(keyword, selectedCategoryId, page, limit).subscribe({
+      this.LessonService.getLessons(keyword, selectedCategoryId, page, limit).subscribe({
         next: (apiResponse: ApiResponse) => {
           debugger
-          const products = apiResponse?.data as Product[]          
-          products.forEach((product: Product) => {                      
+          const lessons = apiResponse?.data as Lesson[]          
+          lessons.forEach((product: Lesson) => {                      
             if (product) {
-              product.url = `${environment.apiBaseUrl}/products/images/${product.thumbnail}`;
+              product.url = `${environment.apiBaseUrl}/Lessons/images/${product.thumbnail}`;
             }          
           });
-          this.products = products;
+          this.lessons = lessons;
           this.totalPages = apiResponse?.data.totalPages;
           this.visiblePages = this.generateVisiblePageArray(this.currentPage, this.totalPages);
         },
@@ -85,7 +85,7 @@ export class ProductAdminComponent implements OnInit {
       debugger;
       this.currentPage = page < 0 ? 0 : page;
       this.localStorage?.setItem('currentProductAdminPage', String(this.currentPage));     
-      this.getProducts(this.keyword, this.selectedCategoryId, this.currentPage, this.itemsPerPage);
+      this.getLessons(this.keyword, this.selectedCategoryId, this.currentPage, this.itemsPerPage);
     }
   
     generateVisiblePageArray(currentPage: number, totalPages: number): number[] {
@@ -107,21 +107,21 @@ export class ProductAdminComponent implements OnInit {
     insertProduct() {
       debugger
       // Điều hướng đến trang detail-product với productId là tham số
-      this.router.navigate(['/admin/products/insert']);
+      this.router.navigate(['/admin/Lessons/insert']);
     } 
 
     // Hàm xử lý sự kiện khi sản phẩm được bấm vào
     updateProduct(productId: number) {
       debugger
       // Điều hướng đến trang detail-product với productId là tham số
-      this.router.navigate(['/admin/products/update', productId]);
+      this.router.navigate(['/admin/Lessons/update', productId]);
     }  
-    deleteProduct(product: Product) {      
+    deleteProduct(lesson: Lesson) {      
       const confirmation = window
       .confirm('Are you sure you want to delete this product?');
       if (confirmation) {
         debugger
-        this.productService.deleteProduct(product.id).subscribe({
+        this.LessonService.deleteProduct(lesson.id).subscribe({
           next: (apiResponse: ApiResponse) => {
             debugger 
             console.error('Xóa thành công')

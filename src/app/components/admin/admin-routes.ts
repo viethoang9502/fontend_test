@@ -1,17 +1,17 @@
 import { AdminComponent } from "./admin.component";
-import { OrderAdminComponent } from "./order/order.admin.component";
-import { DetailOrderAdminComponent } from "./detail-order/detail.order.admin.component";
+import { ProgressAdminComponent } from "./progress/progress.admin.component";
+import { DetailProgressAdminComponent } from "./detail-progress/detail.progress.admin.component";
 import { Route, Router,Routes } from "@angular/router";
 import { NgModule } from "@angular/core";
 import { RouterModule } from "@angular/router";
-import { ProductAdminComponent } from "./product/product.admin.component";
+import { LessonAdminComponent } from "./lesson/lesson.admin.component";
 import { CategoryAdminComponent } from "./category/category.admin.component";
-import { UpdateProductAdminComponent } from "./product/update/update.product.admin.component";
-import { InsertProductAdminComponent } from "./product/insert/insert.product.admin.component";
+import { UpdateProductAdminComponent } from "./lesson/update/update.product.admin.component";
+import { InsertProductAdminComponent } from "./lesson/insert/insert.product.admin.component";
 import { InsertCategoryAdminComponent } from "./category/insert/insert.category.admin.component";
 import { UpdateCategoryAdminComponent } from "./category/update/update.category.admin.component";
 import { UserAdminComponent } from "./user/user.admin.component";
-import { GameSoccerComponent } from "../game-soccer/game-soccer.component";
+// import { GameSoccerComponent } from "../game-soccer/game-soccer.component";
 
 export const adminRoutes: Routes = [
     {
@@ -19,17 +19,17 @@ export const adminRoutes: Routes = [
         component: AdminComponent,
         children: [
             {
-                path: 'orders',
-                component: OrderAdminComponent
+                path: 'progresses',
+                component: ProgressAdminComponent
             },            
             {
-                path: 'products',
-                component: ProductAdminComponent
+                path: 'lessons',
+                component: LessonAdminComponent
             },
-            {
-                path: 'gamesocers',
-                component: GameSoccerComponent
-            },
+            // {
+            //     path: 'gamesocers',
+            //     component: GameSoccerComponent
+            // },
             {
                 path: 'categories',
                 component: CategoryAdminComponent
@@ -37,7 +37,7 @@ export const adminRoutes: Routes = [
             //sub path
             {
                 path: 'orders/:id',
-                component: DetailOrderAdminComponent
+                component: DetailProgressAdminComponent
             },
             {
                 path: 'products/update/:id',

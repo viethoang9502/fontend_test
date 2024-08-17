@@ -1,12 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Location } from '@angular/common';
-import { Product } from '../../../../models/product';
+import { Lesson } from '../../../../models/lesson';
 import { Category } from '../../../../models/category';
-import { ProductService } from '../../../../services/product.service';
+import { LessonService } from '../../../../services/lesson.service';
 import { CategoryService } from '../../../../services/category.service';
 import { environment } from '../../../../../environments/environment';
-import { ProductImage } from '../../../../models/product.image';
+import { LessonImage } from '../../../../models/lesson.image';
 import { UpdateProductDTO } from '../../../../dtos/product/update.product.dto';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
@@ -26,22 +26,22 @@ import { HttpClient, HttpHeaders, HttpErrorResponse } from '@angular/common/http
 
 export class UpdateProductAdminComponent implements OnInit {
   productId: number;
-  product: Product;
-  updatedProduct: Product;
+  lesson: Lesson;
+  updatedProduct: Lesson;
   categories: Category[] = []; // Dữ liệu động từ categoryService
   currentImageIndex: number = 0;
   images: File[] = [];
 
   constructor(
-    private productService: ProductService,
+    private lessonService: LessonService,
     private route: ActivatedRoute,
     private router: Router,
     private categoryService: CategoryService,    
     private location: Location,
   ) {
     this.productId = 0;
-    this.product = {} as Product;
-    this.updatedProduct = {} as Product;  
+    this.lesson = {} as Lesson;
+    this.updatedProduct = {} as Lesson;  
   }
 
   ngOnInit(): void {
@@ -67,12 +67,12 @@ export class UpdateProductAdminComponent implements OnInit {
     });
   }
   getProductDetails(): void {
-    this.productService.getDetailProduct(this.productId).subscribe({
+    this.lessonService.getDetailProduct(this.productId).subscribe({
       next: (apiResponse: ApiResponse) => {
 
-        this.product = apiResponse.data;
+        this.lesson = apiResponse.data;
         this.updatedProduct = { ...apiResponse.data };                
-        this.updatedProduct.product_images.forEach((product_image:ProductImage) => {
+        this.updatedProduct.lesson_images.forEach((product_image:LessonImage) => {
           product_image.image_url = `${environment.apiBaseUrl}/products/images/${product_image.image_url}`;
         });
       },
@@ -93,7 +93,7 @@ export class UpdateProductAdminComponent implements OnInit {
       description: this.updatedProduct.description,
       category_id: this.updatedProduct.category_id
     };
-    this.productService.updateProduct(this.product.id, updateProductDTO).subscribe({
+    this.lessonService.updateProduct(this.lesson.id, updateProductDTO).subscribe({
       next: (apiResponse: ApiResponse) => {  
         debugger        
       },
@@ -109,13 +109,13 @@ export class UpdateProductAdminComponent implements OnInit {
   }
   showImage(index: number): void {
     debugger
-    if (this.product && this.product.product_images && 
-        this.product.product_images.length > 0) {
+    if (this.lesson && this.lesson.lesson_images && 
+        this.lesson.lesson_images.length > 0) {
       // Đảm bảo index nằm trong khoảng hợp lệ        
       if (index < 0) {
         index = 0;
-      } else if (index >= this.product.product_images.length) {
-        index = this.product.product_images.length - 1;
+      } else if (index >= this.lesson.lesson_images.length) {
+        index = this.lesson.lesson_images.length - 1;
       }        
       // Gán index hiện tại và cập nhật ảnh hiển thị
       this.currentImageIndex = index;
@@ -145,7 +145,7 @@ export class UpdateProductAdminComponent implements OnInit {
     }
     // Store the selected files in the newProduct object
     this.images = files;
-    this.productService.uploadImages(this.productId, this.images).subscribe({
+    this.lessonService.uploadImages(this.productId, this.images).subscribe({
       next: (apiResponse: ApiResponse) => {
         debugger
         // Handle the uploaded images response if needed              
@@ -160,11 +160,11 @@ export class UpdateProductAdminComponent implements OnInit {
       } 
     })
   }
-  deleteImage(productImage: ProductImage) {
+  deleteImage(lessonImage: LessonImage) {
     if (confirm('Are you sure you want to remove this image?')) {
       // Call the removeImage() method to remove the image   
-      this.productService.deleteProductImage(productImage.id).subscribe({
-        next:(productImage: ProductImage) => {
+      this.lessonService.deleteProductImage(lessonImage.id).subscribe({
+        next:(productImage: LessonImage) => {
           location.reload();          
         },        
         error: (error: HttpErrorResponse) => {

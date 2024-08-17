@@ -1,13 +1,13 @@
 import { Component, OnInit } from '@angular/core';
-import { Product } from '../../models/product';
+import { Lesson } from '../../models/lesson';
 import { CartService } from '../../services/cart.service';
-import { ProductService } from '../../services/product.service';
-import { OrderService } from '../../services/order.service';
-import { OrderDTO } from '../../dtos/order/order.dto';
+import { LessonService } from '../../services/lesson.service';
+import { ProgressService } from '../../services/progress.service';
+import { ProgressDTO } from '../../dtos/progress/order.dto';
 import { ActivatedRoute } from '@angular/router';
-import { OrderResponse } from '../../responses/order/order.response';
+import { ProgressResponse } from '../../responses/progress/progress.response';
 import { environment } from '../../../environments/environment';
-import { OrderDetail } from '../../models/order.detail';
+import { ProgressDetail } from '../../models/progress.detail';
 import { FooterComponent } from '../footer/footer.component';
 import { HeaderComponent } from '../header/header.component';
 import { CommonModule } from '@angular/common';
@@ -15,9 +15,9 @@ import { ApiResponse } from '../../responses/api.response';
 import { HttpClient, HttpHeaders, HttpErrorResponse } from '@angular/common/http';
 
 @Component({
-  selector: 'app-order-detail',
-  templateUrl: './order.detail.component.html',
-  styleUrls: ['./order.detail.component.scss'],
+  selector: 'app-progress-detail',
+  templateUrl: './progress.detail.component.html',
+  styleUrls: ['./progress.detail.component.scss'],
   standalone: true,
   imports: [
     FooterComponent,
@@ -25,8 +25,8 @@ import { HttpClient, HttpHeaders, HttpErrorResponse } from '@angular/common/http
     CommonModule
   ]
 })
-export class OrderDetailComponent implements OnInit {  
-  orderResponse: OrderResponse = {
+export class ProgressDetailComponent implements OnInit {  
+  orderResponse: ProgressResponse = {
     id: 0, // Hoặc bất kỳ giá trị số nào bạn muốn
     user_id: 0,
     fullname: '',
@@ -41,10 +41,10 @@ export class OrderDetailComponent implements OnInit {
     shipping_address: '',
     shipping_date: new Date(),
     payment_method: '',
-    order_details: [] // Một mảng rỗng
+    progress_details: [] // Một mảng rỗng
   };  
   constructor(
-    private orderService: OrderService,
+    private progressService: ProgressService,
     private route: ActivatedRoute
     ) {}
 
@@ -55,7 +55,7 @@ export class OrderDetailComponent implements OnInit {
   getOrderDetails(): void {
     debugger
     const orderId = Number(this.route.snapshot.paramMap.get('orderId'));
-    this.orderService.getOrderById(orderId).subscribe({
+    this.progressService.getOrderById(orderId).subscribe({
       next: (apiResponse: ApiResponse) => {        
         debugger;   
         const response = apiResponse.data    
@@ -72,9 +72,9 @@ export class OrderDetailComponent implements OnInit {
           response.order_date[2]
         );        
         
-        this.orderResponse.order_details = response.order_details
-          .map((order_detail: OrderDetail) => {
-          order_detail.product.thumbnail = `${environment.apiBaseUrl}/products/images/${order_detail.product.thumbnail}`;
+        this.orderResponse.progress_details = response.order_details
+          .map((order_detail: ProgressDetail) => {
+          order_detail.lesson.thumbnail = `${environment.apiBaseUrl}/lessons/images/${order_detail.lesson.thumbnail}`;
           return order_detail;
         });        
         this.orderResponse.payment_method = response.payment_method;

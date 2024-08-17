@@ -6,7 +6,7 @@
         <input type="text" class="form-control search-input" placeholder="Tìm sản phẩm" [(ngModel)]="keyword">
       </div>
       <div class="col-md-4">
-        <button class="btn btn-primary" (click)="searchProducts()">Tìm kiếm</button>
+        <button class="btn btn-primary" (click)="searchLessons()">Tìm kiếm</button>
       </div>
     </div>
     <div class="row">
@@ -27,7 +27,7 @@
         </tr>
       </thead>
       <tbody>        
-        @for(product of products; track product.id) {
+        @for(product of lessons; track product.id) {
           <tr>
             <td>{{ product.id }}</td>
             <td>{{ product.name }}</td>
