@@ -16,7 +16,7 @@ export class InsertProductDTO {
 
     category_id: number;
     images: File[] = [];
-    
+    videos: File[] = [];
     constructor(data: any) {
         this.name = data.name;
         this.price = data.price;

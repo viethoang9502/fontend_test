@@ -36,19 +36,19 @@
           </tr>
         </thead>
         <tbody>
-          @for(progresses of progresses; track progresses.id){
+          @for(progress of progresses; track progress.id){
             <tr>
               <td>              
-                {{ progresses.id }}</td>
-              <td>{{ progresses.user_id }}</td>
-              <td>{{ progresses.fullname }}</td>
-              <td>{{ progresses.email }}</td>
-              <td>{{ progresses.phone_number }}</td>
-              <td>{{ progresses.address }}</td>
-              <td>{{ progresses.note }}</td>
-              <td>{{ progresses.order_date | date }}</td>
-              <td>{{ progresses.status }}</td>
-              <td>{{ progresses.total_money }}</td>
+                {{ progress.id }}</td>
+              <td>{{ progress.user_id }}</td>
+              <td>{{ progress.fullname }}</td>
+              <td>{{ progress.email }}</td>
+              <td>{{ progress.phone_number }}</td>
+              <td>{{ progress.address }}</td>
+              <td>{{ progress.note }}</td>
+              <td>{{ progress.order_date | date }}</td>
+              <td>{{ progress.status }}</td>
+              <td>{{ progress.total_money }}</td>
               <!--
               <td>{{ order.shipping_method }}</td>
               <td>{{ order.shipping_address }}</td>

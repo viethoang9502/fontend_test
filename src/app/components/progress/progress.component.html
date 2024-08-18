@@ -61,7 +61,15 @@
             </div>        
             <div class="col-md-7">
                 <h2 class="product-order">Khóa Học và Tiến Độ</h2>
-                <table>
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th scope="col" class="text-start">Bài học</th>
+                            <th scope="col">Tiến trình</th>
+                            <th scope="col">Điểm số</th>
+                            <th scope="col">Học lại</th>
+                        </tr>
+                    </thead>
                     <tbody>
                         <ng-container *ngFor="let item of cartItems; let i = index">
                             <tr>
@@ -72,16 +80,16 @@
                                     </div>
                                 </td>
                                 <td>
-                                    <div class="product-quantity">
-                                        <div class="border-wrapper">
-                                            <button (click)="decreaseQuantity(i)">-</button>
-                                            <input type="number" [value]="item.quantity" min="0" max="100" readonly>
-                                            <button (click)="increaseQuantity(i)">+</button>
+                                    <div class="progress">
+                                        <div class="progress-bar" role="progressbar"
+                                             [style.width.%]="item.quantity"
+                                             [attr.aria-valuenow]="item.quantity"
+                                             aria-valuemin="0" 
+                                             aria-valuemax="100">
                                         </div>
                                     </div>
-                                </td>
-                                <td>{{ item.lesson.price | number:'1.2-2' }}</td>
-                                <td>{{ (item.lesson.price * item.quantity) | number:'1.2-2' }}</td>
+                                </td>              
+                                <td>{{ (item.lesson.price * item.quantity) | number:'1.2-2' }} / {{ item.lesson.price | number:'1.2-2' }}</td>
                                 <td>
                                     <button class="btn btn-danger" (click)="confirmDelete(i)">
                                         Xóa

@@ -56,8 +56,17 @@ export class LessonService {
     for (let i = 0; i < files.length; i++) {
       formData.append('files', files[i]);
     }
-    return this.http.post<ApiResponse>(`${this.apiBaseUrl}/lessons/uploads/${lessonId}`, formData);
+    return this.http.post<ApiResponse>(`${this.apiBaseUrl}/lessons/uploads/images/${lessonId}`, formData);
   }
+
+  uploadVideos(lessonId: number, files: File[]): Observable<ApiResponse> {
+    const formData = new FormData();
+    for (let i = 0; i < files.length; i++) {
+      formData.append('files', files[i]);
+    }
+    return this.http.post<ApiResponse>(`${this.apiBaseUrl}/lessons/uploads/videos/${lessonId}`, formData);
+  }
+
 
   deleteProductImage(id: number): Observable<any> {
     return this.http.delete<string>(`${this.apiBaseUrl}/lesson_images/${id}`);

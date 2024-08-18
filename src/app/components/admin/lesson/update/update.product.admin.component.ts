@@ -24,7 +24,7 @@ import { HttpClient, HttpHeaders, HttpErrorResponse } from '@angular/common/http
   ]
 })
 
-export class UpdateProductAdminComponent implements OnInit {
+export class UpdateLessonAdminComponent implements OnInit {
   productId: number;
   lesson: Lesson;
   updatedProduct: Lesson;
@@ -72,8 +72,10 @@ export class UpdateProductAdminComponent implements OnInit {
 
         this.lesson = apiResponse.data;
         this.updatedProduct = { ...apiResponse.data };                
-        this.updatedProduct.lesson_images.forEach((product_image:LessonImage) => {
-          product_image.image_url = `${environment.apiBaseUrl}/products/images/${product_image.image_url}`;
+        this.updatedProduct.lesson_images.forEach((lesson_image:LessonImage) => {
+          if (lesson_image.image_url && !lesson_image.image_url.startsWith('http')) {
+            lesson_image.image_url = `${environment.apiBaseUrl}/lessons/images/${lesson_image.image_url}`;
+          }
         });
       },
       complete: () => {

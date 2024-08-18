@@ -6,8 +6,8 @@ import { NgModule } from "@angular/core";
 import { RouterModule } from "@angular/router";
 import { LessonAdminComponent } from "./lesson/lesson.admin.component";
 import { CategoryAdminComponent } from "./category/category.admin.component";
-import { UpdateProductAdminComponent } from "./lesson/update/update.product.admin.component";
-import { InsertProductAdminComponent } from "./lesson/insert/insert.product.admin.component";
+import { UpdateLessonAdminComponent } from "./lesson/update/update.product.admin.component";
+import { InsertLessonAdminComponent } from "./lesson/insert/insert.lesson.admin.component";
 import { InsertCategoryAdminComponent } from "./category/insert/insert.category.admin.component";
 import { UpdateCategoryAdminComponent } from "./category/update/update.category.admin.component";
 import { UserAdminComponent } from "./user/user.admin.component";
@@ -36,16 +36,16 @@ export const adminRoutes: Routes = [
             },
             //sub path
             {
-                path: 'orders/:id',
+                path: 'progress/:id',
                 component: DetailProgressAdminComponent
             },
             {
-                path: 'products/update/:id',
-                component: UpdateProductAdminComponent
+                path: 'lessons/update/:id',
+                component: UpdateLessonAdminComponent
             },
             {
-                path: 'products/insert',
-                component: InsertProductAdminComponent
+                path: 'lessons/insert',
+                component: InsertLessonAdminComponent
             },
             //categories            
             {

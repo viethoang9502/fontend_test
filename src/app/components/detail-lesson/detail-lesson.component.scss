@@ -8,60 +8,26 @@ $videobold-color: #333; // Màu văn bản
 $border-radius: 15px; // Bo góc
 
 .lesson-header {
-  text-align: center;
-  border-radius: $border-radius;
-  box-shadow: 0 5px 10px #a2bebc;
-  margin-bottom: 10px;
-  position: relative;
-  margin: 20px auto; // Căn giữa
-  overflow: hidden;
-  max-width: 800px; // Đặt chiều rộng tối đa
+  text-align: center;;
+  margin: 20px auto;
+  background-color: #ffffff;
+}
 
-  &:before {
-    content: '';
-    position: absolute;
-    top: -50%;
-    left: -50%;
-    width: 200%;
-    height: 200%;
-    background: radial-gradient(circle, rgba(255,255,255,0.3) 20%, transparent 50%);
-    transform: rotate(30deg);
-    opacity: 0.5;
-    transition: opacity 0.5s ease-in-out;
-  }
+.lesson-title {
+  font-size: 4rem;
+  font-weight: bold;
+  color: #333333;
+  margin: 0;
+}
 
-  &:hover:before {
-    opacity: 1;
-  }
-
-  .lesson-title {
-    font-size: 4rem;
-    color: $primary-color;
-    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.4);
-    margin: 0;
-    position: relative;
-    z-index: 1;
-  }
-
-  .lesson-description {
-    font-size: 1.7rem;
-    color: rgba(0, 0, 0, 0.9);
-    margin-top: 15px;
-    position: relative;
-    z-index: 1;
-    max-width: 80%;
-    margin: 0 auto;
-  }
-} 
-
-.lesson-container {
-  width: 100%;
-  padding: 20px 0;
+.lesson-description {
+  font-size: 2.5rem;
+  color: #666666;
 }
 
 .lesson-content {
   display: flex;
-  flex-direction: column; /* Sắp xếp các phần tử theo chiều dọc */
+  flex-direction: column;
   justify-content: center;
   align-items: center;
   padding: 0 10%;
@@ -70,15 +36,12 @@ $border-radius: 15px; // Bo góc
 
 .lesson-media {
   display: flex;
-  flex-direction: row; /* Sắp xếp ảnh và video theo chiều ngang */
-  gap: 20px;
   align-items: center;
-  background-color: rgba(255, 255, 255, 0.9); /* Nền trắng với độ trong suốt */
+  background-color: rgba(255, 255, 255, 0.9);
   border-radius: $border-radius;
   padding: 20px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Đổ bóng cho khối */
-  border: 2px solid $primary-color; /* Đường viền cho khối */
-  max-width: 2000px; /* Đặt chiều rộng tối đa */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  border: 2px solid $primary-color;
 }
 
 .media-container, .video-container {
@@ -86,25 +49,18 @@ $border-radius: 15px; // Bo góc
   height: 500px; // Cố định chiều cao
   display: flex;
   justify-content: center;
-  margin-bottom: 20px;
+  position: relative;
 }
 
-img.media-image {
-  max-width: 100%;
-  max-height: 100%;
+img.media-image, video.lesson-video {
+  width: 700px; // Cố định chiều rộng
+  height: 500px; // Cố định chiều cao
   border-radius: $border-radius;
   transition: transform 0.3s ease;
 
   &:hover {
     transform: scale(1.05);
   }
-}
-
-video.lesson-video {
-  max-width: 100%;
-  max-height: 100%;
-  border-radius: $border-radius;
-  border: 2px solid $videobold-color; 
 }
 
 .lesson-details {
@@ -115,13 +71,12 @@ video.lesson-video {
 
 .media-controls {
   display: flex;
-  align-items: center;
   justify-content: space-between;
   width: 100%;
-  margin-bottom: 20px;
+  margin-top: 20px;
 
   .btn {
-    background-color: $primary-color;
+    background-color: $highlight-color;
     color: #fff;
     border: none;
     padding: 10px 20px;
@@ -129,6 +84,7 @@ video.lesson-video {
     display: flex;
     align-items: center;
     cursor: pointer;
+    border-radius: $border-radius;
     transition: background-color 0.3s ease;
     
     i {
@@ -136,19 +92,21 @@ video.lesson-video {
     }
 
     &:hover {
-      background-color: darken($primary-color, 10%);
+      background-color: darken($highlight-color, 10%);
     }
   }
 
   .btn-previous, .btn-next {
     background-color: $highlight-color;
+    width: 150px;
+    justify-content: center;
   }
 }
 
 .lesson-progress {
   flex-grow: 1;
   display: flex;
-  margin: 0 20px; /* Khoảng cách giữa nút và thanh tiến trình */
+  margin: 20px 0; 
   align-items: center;
   justify-content: center;
   gap: 10px;
@@ -192,7 +150,7 @@ video.lesson-video {
   .btn {
     background-color: $secondary-color;
     color: #fff;
-    border: none;
+    border: $border-radius;
     padding: 10px 20px;
     font-size: 1.2rem;
     display: flex;
@@ -209,42 +167,27 @@ video.lesson-video {
     }
 
     &.btn-favorite {
-      background-color: #e91e63; // Màu hồng cho nút yêu thích
+      background-color: #d84b7a;
     }
 
     &.btn-start {
-      background-color: $primary-color; // Màu xanh cho nút bắt đầu học
+      background-color: #4bd896;
     }
-  }
-}
-
-.lesson-actions {
-  display: flex;
-  justify-content: space-between;
-  margin-bottom: 20px;
-
-  button {
-    border-radius: $border-radius;
-  }
-}
-
-.lesson-progress {
-  margin-bottom: 20px;
-
-  input[type="range"] {
-    width: 100%;
-    margin-top: 10px;
+    &.btn-game {
+      background-color: #cc4bd8;
+    }
   }
 }
 
 .media-controls {
   display: flex;
-  justify-content: space-between;
+  width: 100%;
+  margin-top: 0px;
 
-  button {
+  .btn {
     background-color: $primary-color;
     color: white;
-    border: none;
+    border: $border-radius;
     padding: 10px 20px;
     border-radius: $border-radius;
     cursor: pointer;
@@ -269,8 +212,4 @@ video.lesson-video {
 
 .fade-in {
   opacity: 1;
-}
-
-.previous-button, .next-button {
-  margin: 0 20px; /* Khoảng cách giữa nút và thanh tiến trình */
 }

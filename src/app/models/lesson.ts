@@ -1,4 +1,5 @@
 import { LessonImage } from "./lesson.image";
+import { LessonVideo } from "./lesson.video";
 export interface Lesson {
   id: number;
   name: string;
@@ -8,6 +9,7 @@ export interface Lesson {
   category_id: number;
   url: string;
   lesson_images: LessonImage[];
+  lesson_videos: LessonVideo[];
 }
 
   

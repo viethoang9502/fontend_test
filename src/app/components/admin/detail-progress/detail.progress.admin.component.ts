@@ -26,7 +26,7 @@ import { HttpClient, HttpHeaders, HttpErrorResponse } from '@angular/common/http
 })
 
 export class DetailProgressAdminComponent implements OnInit{    
-  orderId:number = 0;
+  progressId:number = 0;
   progressResponse: ProgressResponse = {
     id: 0, // Hoặc bất kỳ giá trị số nào bạn muốn
     user_id: 0,
@@ -57,8 +57,8 @@ export class DetailProgressAdminComponent implements OnInit{
   
   getOrderDetails(): void {
     debugger
-    this.orderId = Number(this.route.snapshot.paramMap.get('id'));
-    this.progressService.getOrderById(this.orderId).subscribe({
+    this.progressId = Number(this.route.snapshot.paramMap.get('id'));
+    this.progressService.getOrderById(this.progressId).subscribe({
       next: (apiResponse: ApiResponse) => {        
         debugger;       
         const response = apiResponse.data    
@@ -109,7 +109,7 @@ export class DetailProgressAdminComponent implements OnInit{
   saveOrder(): void {    
     debugger        
     this.progressService
-      .updateOrder(this.orderId, new ProgressDTO(this.progressResponse))
+      .updateOrder(this.progressId, new ProgressDTO(this.progressResponse))
       .subscribe({
       next: (response: ApiResponse) => {
         debugger

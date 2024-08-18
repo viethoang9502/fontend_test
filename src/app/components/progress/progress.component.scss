@@ -204,4 +204,17 @@ table {
     border-top-left-radius: 0;
     border-bottom-left-radius: 0;
   }
+
+  .progress {
+    height: 20px;
+    background-color: #f3f3f3;
+}
+
+.progress-bar {
+    background-color: #007bff;
+    line-height: 20px;
+    color: white;
+    text-align: center;
+}
+
 }

@@ -113,6 +113,7 @@ export class ProgressAdminComponent implements OnInit{
       });    
     }
   }
+  
   viewDetails(progress:ProgressResponse) {
     debugger
     this.router.navigate(['/admin/orders', progress.id]);
